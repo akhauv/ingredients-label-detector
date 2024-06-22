@@ -1,0 +1,26 @@
+<annotation>
+	<folder>resized_images</folder>
+	<filename>8.jpeg</filename>
+	<path>/Users/amberkhauv/Downloads/ingredients-label-detector/data/resized_images/8.jpeg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>600</width>
+		<height>800</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>ingredients</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>175</xmin>
+			<ymin>432</ymin>
+			<xmax>379</xmax>
+			<ymax>540</ymax>
+		</bndbox>
+	</object>
+</annotation>
