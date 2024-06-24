@@ -1,8 +1,8 @@
 import os
 from PIL import Image, ExifTags
 
-input_dir = './data/raw_images'
-output_dir = './data/resized_images'
+input_dir = '../data/raw_images'
+output_dir = '../data/resized_images'
 new_size = (600, 800)
 
 count = 1
