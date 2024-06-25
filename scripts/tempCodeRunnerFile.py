@@ -1,1 +1,0 @@
-collate_fn=lambda x: tuple(zip(*x))
