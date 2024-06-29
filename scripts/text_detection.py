@@ -14,19 +14,6 @@ from lib.rpn_msr.proposal_layer_tf import proposal_layer
 
 from text_detection_class import LabelDetector
 
-# DELETE THIS METHOD LATER
-def return_blobs_tuple(boxes, scale):
-    blob_list = []
-    for box in boxes:
-        min_x = min(int(box[0] / scale), int(box[2] / scale), int(box[4] / scale), int(box[6] / scale))
-        min_y = min(int(box[1] / scale), int(box[3] / scale), int(box[5] / scale), int(box[7] / scale))
-        max_x = max(int(box[0] / scale), int(box[2] / scale), int(box[4] / scale), int(box[6] / scale))
-        max_y = max(int(box[1] / scale), int(box[3] / scale), int(box[5] / scale), int(box[7] / scale)) 
-
-        blob_list.append((min_x, min_y, max_x, max_y))
-
-    return(tuple(blob_list))
-
 '''
 Detects all text within an image
     Returns: nothing
@@ -78,6 +65,7 @@ def draw_boxes(img, image_name, boxes, scale):
     base_name = image_name.split('/')[-1]
 
     # open a text file to write bounding box coordinates 
+    boxes_tuple = []
     with open('data/results/' + 'res_{}.txt'.format(base_name.split('.')[0]), 'w') as f:
         # filter out very small boxes 
         boxes = filter_boxes(boxes)
@@ -108,9 +96,13 @@ def draw_boxes(img, image_name, boxes, scale):
             line = ','.join([str(min_x), str(min_y), str(max_x), str(max_y)]) + '\r\n'
             f.write(line)
 
+            # append to blobs tuple
+            boxes_tuple.append((min_x, min_y, max_x, max_y))
+
     # resize image back to regular scale and save results image
     img = cv2.resize(img, None, None, fx=1.0 / scale, fy=1.0 / scale, interpolation=cv2.INTER_LINEAR)
     cv2.imwrite(os.path.join("data/results", base_name), img)
+    return boxes_tuple
 
 '''
 Filters out all boxes too small to be valid text lines.
@@ -243,5 +235,5 @@ if __name__ == '__main__':
     img_path = input()
     print("analyzing")
 
-    detect_text(img_path)
+    print(detect_text(img_path))
     print("done!")
