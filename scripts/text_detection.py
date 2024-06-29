@@ -12,7 +12,7 @@ from lib.text_connector.detectors import TextDetector
 from lib.text_connector.text_connect_cfg import Config as TextLineCfg
 from lib.rpn_msr.proposal_layer_tf import proposal_layer
 
-from text_detection_class import TextDetector
+from text_detection_class import LabelDetector
 
 # DELETE THIS METHOD LATER
 def return_blobs_tuple(boxes, scale):
@@ -109,7 +109,7 @@ def detect_text(img_path):
 if __name__ == '__main__':
     # load model 
     global model
-    model = TextDetector()
+    model = LabelDetector()
 
     # take in image path to analyze
     print("Enter image path:")

@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow.python.platform import gfile    # used to read the frozen model file 
 
-class TextDetector(object):
+class LabelDetector(object):
     def __init__(self):
         # create tensorflow session that can use any available devices for operations
         config = tf.compat.v1.ConfigProto(allow_soft_placement=True)
