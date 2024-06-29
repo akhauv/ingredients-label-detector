@@ -16,7 +16,7 @@ from text_detection_class import LabelDetector
 
 '''
 Detects all text within an image
-    Returns: nothing
+    Returns: list of all blobs
 '''
 def detect_text(img_path):
     # load image and resize
@@ -55,14 +55,14 @@ def detect_text(img_path):
     boxes = merge_overlapping_boxes(boxes)
 
     # extract boxes information 
-    boxes_list = []
+    blobs_list = []
     for box in boxes:
         min_x, min_y, max_x, max_y = get_bounds(box)
-        boxes_list.append((int(min_x / scale), int(min_y / scale), int(max_x / scale), int(max_y / scale)))
+        blobs_list.append((int(min_x / scale), int(min_y / scale), int(max_x / scale), int(max_y / scale)))
 
     # draw boxes and return information
-    draw_boxes(img, img_path, boxes, scale)
-    return boxes_list
+    # draw_boxes(img, img_path, boxes, scale)
+    return blobs_list
 
 '''
 Given a list of bounding boxes, draws each onto the image and outputs
@@ -154,6 +154,14 @@ def has_overlap(box_one, box_two):
     return True
 
 '''
+loads model
+    Returns: nothing
+'''
+def load_model():
+    global model
+    model = LabelDetector()
+
+'''
 Merges two given boxes into one
     Returns: numpy ndarray with the new bounding box information
 '''
@@ -226,8 +234,7 @@ main
 '''
 if __name__ == '__main__':
     # load model 
-    global model
-    model = LabelDetector()
+    load_model()
 
     # take in image path to analyze
     print("Enter image path:")

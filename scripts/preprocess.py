@@ -1,7 +1,5 @@
 import numpy as np
 import cv2
-import pytesseract
-from PIL import Image
 
 img = cv2.imread('data/raw_images/14.jpeg')
 
@@ -61,7 +59,7 @@ def invert(img):
 
 
 # workds for most standard images
-def attempt_one(img):
+def process_standard(img):
     img = denoise(img)
     # show_image(img)
     img = grayscale(img)
@@ -73,22 +71,7 @@ def attempt_one(img):
     return img
 
 # workds for images with a low text/background contrast
-def attempt_two(img):
-    # show_image(img)
-    img = denoise(img)
-    # show_image(img)
-    img = increase_contrast(img)
-    # show_image(img)
-    img = grayscale(img)
-    # show_image(img)
-    img = threshold(img)
-    # show_image(img)
-    img = denoise(img)
-    show_image(img)
-    return img
-
-# workds for images with a low text/background contrast
-def attempt_two(img):
+def process_contrast(img):
     # show_image(img)
     img = denoise(img)
     # show_image(img)
@@ -103,7 +86,7 @@ def attempt_two(img):
     return img
 
 # workds for images with whose lighting needs to be evened out
-def attempt_three(img):
+def process_gradient(img):
     # show_image(img)
     img = grayscale(img)
     # show_image(img)
@@ -120,7 +103,7 @@ def attempt_three(img):
     return img
 
 # workds for images with a low text/background contrast and need to be inverted
-def attempt_four(img):
+def process_invert(img):
     # show_image(img)
     img = denoise(img)
     # show_image(img)
@@ -139,23 +122,3 @@ def attempt_four(img):
     img = erode(img)
     # show_image(img)
     return img
-
-
-
-# img = increase_contrast(img)
-# show_image(img)
-
-# img = grayscale(img)
-# show_image(img)
-
-# img = threshold(img)
-# show_image(img)
-
-show_image(img)
-print(pytesseract.image_to_string(Image.fromarray(attempt_one(img))))
-print("\n\n\n-----------!!!!!------\n\n\n")
-print(pytesseract.image_to_string(Image.fromarray(attempt_two(img))))
-print("\n\n\n-----------!!!!!------\n\n\n")
-print(pytesseract.image_to_string(Image.fromarray(attempt_three(img))))
-print("\n\n\n-----------!!!!!------\n\n\n")
-print(pytesseract.image_to_string(Image.fromarray(attempt_four(img))))
