@@ -50,9 +50,19 @@ def detect_text(img_path):
     textdetector = TextDetector()
     boxes = textdetector.detect(boxes, scores[:, np.newaxis], img.shape[:2])
 
+    # filter out very small boxes and merge overlapping boxes
+    boxes = filter_boxes(boxes)
+    boxes = merge_overlapping_boxes(boxes)
+
+    # extract boxes information 
+    boxes_list = []
+    for box in boxes:
+        min_x, min_y, max_x, max_y = get_bounds(box)
+        boxes_list.append((int(min_x / scale), int(min_y / scale), int(max_x / scale), int(max_y / scale)))
+
     # draw boxes and return information
     draw_boxes(img, img_path, boxes, scale)
-    return(return_blobs_tuple(boxes, scale))
+    return boxes_list
 
 '''
 Given a list of bounding boxes, draws each onto the image and outputs
@@ -65,14 +75,7 @@ def draw_boxes(img, image_name, boxes, scale):
     base_name = image_name.split('/')[-1]
 
     # open a text file to write bounding box coordinates 
-    boxes_tuple = []
     with open('data/results/' + 'res_{}.txt'.format(base_name.split('.')[0]), 'w') as f:
-        # filter out very small boxes 
-        boxes = filter_boxes(boxes)
-
-        # merge overlapping boxes
-        boxes = merge_overlapping_boxes(boxes)
-
         for box in boxes:
             # assign colors based on confidence score
             if box[8] >= 0.9:
@@ -96,13 +99,9 @@ def draw_boxes(img, image_name, boxes, scale):
             line = ','.join([str(min_x), str(min_y), str(max_x), str(max_y)]) + '\r\n'
             f.write(line)
 
-            # append to blobs tuple
-            boxes_tuple.append((min_x, min_y, max_x, max_y))
-
     # resize image back to regular scale and save results image
     img = cv2.resize(img, None, None, fx=1.0 / scale, fy=1.0 / scale, interpolation=cv2.INTER_LINEAR)
     cv2.imwrite(os.path.join("data/results", base_name), img)
-    return boxes_tuple
 
 '''
 Filters out all boxes too small to be valid text lines.
