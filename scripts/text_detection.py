@@ -34,31 +34,41 @@ def resize_img(img, scale, max_scale=None):
     return cv2.resize(img, None, None, fx=f, fy=f, interpolation=cv2.INTER_LINEAR), f
 
 def draw_boxes(img, image_name, boxes, scale):
+    # extract name of img file from full path 
     base_name = image_name.split('/')[-1]
+
+    # open a text file to write bounding box coordinates 
     with open('data/results/' + 'res_{}.txt'.format(base_name.split('.')[0]), 'w') as f:
         for box in boxes:
+            # filter out very small boxes 
             if np.linalg.norm(box[0] - box[1]) < 5 or np.linalg.norm(box[3] - box[0]) < 5:
                 continue
+
+            # assign colors based on confidence score
             if box[8] >= 0.9:
                 color = (0, 255, 0)
             elif box[8] >= 0.8:
                 color = (255, 0, 0)
+            
+            # draw box
             cv2.line(img, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), color, 2)
             cv2.line(img, (int(box[0]), int(box[1])), (int(box[4]), int(box[5])), color, 2)
             cv2.line(img, (int(box[6]), int(box[7])), (int(box[2]), int(box[3])), color, 2)
             cv2.line(img, (int(box[4]), int(box[5])), (int(box[6]), int(box[7])), color, 2)
 
+            # calculate coords based on original image scale to revert to original image dimesions 
             min_x = min(int(box[0] / scale), int(box[2] / scale), int(box[4] / scale), int(box[6] / scale))
             min_y = min(int(box[1] / scale), int(box[3] / scale), int(box[5] / scale), int(box[7] / scale))
             max_x = max(int(box[0] / scale), int(box[2] / scale), int(box[4] / scale), int(box[6] / scale))
             max_y = max(int(box[1] / scale), int(box[3] / scale), int(box[5] / scale), int(box[7] / scale))
 
+            # write coordinates to result file 
             line = ','.join([str(min_x), str(min_y), str(max_x), str(max_y)]) + '\r\n'
             f.write(line)
 
+    # resize image back to regular scale and save results image
     img = cv2.resize(img, None, None, fx=1.0 / scale, fy=1.0 / scale, interpolation=cv2.INTER_LINEAR)
     cv2.imwrite(os.path.join("data/results", base_name), img)
-
 
 def detect_text(img_path):
     # load image and resize
@@ -104,3 +114,7 @@ if __name__ == '__main__':
     # take in image path to analyze
     print("Enter image path:")
     img_path = input()
+    print("analyzing")
+
+    detect_text(img_path)
+    print("done!")
