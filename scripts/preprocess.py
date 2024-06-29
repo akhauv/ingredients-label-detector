@@ -3,21 +3,13 @@ import cv2
 
 img = cv2.imread('data/raw_images/14.jpeg')
 
-# convert to greyscale 
-def grayscale(img):
-    return cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# adaptive threshold, good for shadows
+def adaptive_threshold(img):
+    return cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 25, 2)
 
 # noise removal
 def denoise(img, blur = 5):
     return cv2.medianBlur(img,blur)
-
-def morph(img):
-    kernel = np.ones((3,3), np.uint8)
-    return cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
-
-# threshold
-def threshold(img):
-    return cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
 
 # dilation
 def dilate(img):
@@ -29,6 +21,11 @@ def erode(img):
     kernel = np.ones((5,5), np.uint8)
     return cv2.dilate(img, kernel, iterations = 1)
 
+# convert to greyscale 
+def grayscale(img):
+    return cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# increase image contrast
 def increase_contrast(img, grid_size = 30):
     # CLAHE (Contrast Limited Adaptive Histogram Equalization)
     clahe = cv2.createCLAHE(clipLimit=5, tileGridSize=(grid_size,grid_size))
@@ -42,21 +39,29 @@ def increase_contrast(img, grid_size = 30):
     img = cv2.cvtColor(lab, cv2.COLOR_LAB2BGR)  # convert from LAB to BGR
     return img
 
-def show_image(img):
-    cv2.imshow('Image', img)
-    cv2.waitKey(0)  # Wait for a key press to close the window
-    cv2.destroyAllWindows()  # Close the window
-
-def adaptive_threshold(img):
-    return cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 25, 2)
-
-def opening(img):
-    kernel = np.ones((5,5),np.uint8)
-    return cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
-
+# invert image
 def invert(img):
     return cv2.bitwise_not(img)
 
+# morph image
+def morph(img):
+    kernel = np.ones((3,3), np.uint8)
+    return cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+
+# open image
+def open(img):
+    kernel = np.ones((5,5),np.uint8)
+    return cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
+
+# threshold
+def threshold(img):
+    return cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+
+# displays image
+def show_image(img):
+    cv2.imshow('Image', img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 # workds for most standard images
 def process_standard(img):
@@ -92,7 +97,7 @@ def process_gradient(img):
     # show_image(img)
     img = denoise(img, 9)
     # show_image(img)
-    img = opening(img)
+    img = open(img)
     # show_image(img)
     img = adaptive_threshold(img)
     # show_image(img)

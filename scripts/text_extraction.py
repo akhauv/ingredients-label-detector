@@ -22,9 +22,6 @@ if __name__ == '__main__':
     # apply ocr for each blob
     for blob in blobs:
         cropped_img = img[blob[1]:blob[3], blob[0]:blob[2]]
-        cv2.imshow('Image', cropped_img)
-        cv2.waitKey(0)  # Wait for a key press to close the window
-        cv2.destroyAllWindows()  # Close the window
 
         print(pytesseract.image_to_string(Image.fromarray(preprocess.process_standard(cropped_img))))
 
