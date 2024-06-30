@@ -72,7 +72,7 @@ def process_standard(img):
     img = threshold(img)
     # show_image(img)
     img = denoise(img)
-    show_image(img)
+    # show_image(img)
     return img
 
 # workds for images with a low text/background contrast
@@ -87,7 +87,7 @@ def process_contrast(img):
     img = threshold(img)
     # show_image(img)
     img = denoise(img)
-    show_image(img)
+    # show_image(img)
     return img
 
 # workds for images with whose lighting needs to be evened out
@@ -104,7 +104,7 @@ def process_gradient(img):
     img = threshold(img)
     # show_image(img)
     img = denoise(img,9)
-    show_image(img)
+    # show_image(img)
     return img
 
 # workds for images with a low text/background contrast and need to be inverted
