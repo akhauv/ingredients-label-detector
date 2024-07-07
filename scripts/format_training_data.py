@@ -1,4 +1,4 @@
-in_path = "./data/training_data/data_to_format.txt"
+in_path = "./data/training_data/unformatted_data.txt"
 out_path = "./data/training_data/formatted_data.txt"
 
 f = open(in_path, "r")
