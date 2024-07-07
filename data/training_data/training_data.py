@@ -1523,4 +1523,4 @@ text = [
 	'. Protein 2g <',
 ]
 
-first_invalid = 149
+num_valid = 149
