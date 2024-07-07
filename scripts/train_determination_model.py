@@ -30,3 +30,6 @@ trainer = Trainer(
 
 # Fine-tune the model
 trainer.train()
+
+# save the model
+trainer.save_model('../models/trained')
