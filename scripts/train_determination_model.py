@@ -29,7 +29,7 @@ def train_dataset():
 
     # training parameters
     training_args = TrainingArguments(
-        output_dir='./models/trained',   # output directory
+        output_dir='./models',          # output directory
         num_train_epochs=3,              # total number of training epochs
         per_device_train_batch_size=16,  # batch size for training
         per_device_eval_batch_size=64,   # batch size for evaluation
@@ -54,6 +54,8 @@ def train_dataset():
 
     # Save the trained model and tokenizer
     model.save_pretrained('./models/trained')
+    tokenizer.save_pretrained('./models/trained')
+
 
 if __name__ == '__main__':
     train_dataset()
