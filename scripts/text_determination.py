@@ -28,8 +28,8 @@ def predict(texts):
 
     # converts logits into probabilities and extracts maximum probability from each
     probabilities = torch.nn.functional.softmax(logits, dim=-1)
-    confidence_scores, _ = torch.max(probabilities, dim=-1)
-    return confidence_scores
+    confidence_scores, predictions = torch.max(probabilities, dim=-1)
+    return confidence_scores, predictions
 
 '''
 Splits the text if it exceeds the number of tokens 
@@ -62,10 +62,13 @@ if __name__ == '__main__':
     # load model
     load_model()
 
-    testing_texts = ['Contains 2% or less of salt, whey, paprika, monosodium',
-                     'glutamate, buttermilk, parmesan cheese (milk, cheese cultures']
+    testing_texts = ['- ] Ingredients: Enriched flovr (wheat flout, rao: reduced iron,”',
+                    'vitamin Bj (thiamin monondate), tame B; (rofl, ie',
+                    ', vegetable oil (high oles soybean,’so,bean’ palm, «2,',
+                    'of canola with TRHO for freshness), white cheddar * s *;',]
     testing_texts = split(testing_texts)
 
     # Get predictions
-    confidence_scores = predict(testing_texts)
+    confidence_scores, predictions = predict(testing_texts)
     print(confidence_scores)
+    print(predictions)
