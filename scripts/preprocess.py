@@ -1,7 +1,10 @@
 import numpy as np
 import cv2
 
-img = cv2.imread('data/raw_images/14.jpeg')
+'''
+All image preprocessing functions to be used before passing in images
+to pytesseract for text extraction. 
+'''
 
 # adaptive threshold, good for shadows
 def adaptive_threshold(img):

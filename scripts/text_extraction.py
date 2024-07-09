@@ -4,6 +4,8 @@ from PIL import Image
 import cv2
 import preprocess
 
+output_path = './data/training_data/unformatted_data.txt'
+
 '''
 Preprocesses and extracts text from a given image
     Returns: a list of each string extraction from the preprocessed images. 
@@ -49,11 +51,20 @@ if __name__ == '__main__':
     # load model 
     load_model()
 
-    # take in image path to analyze
-    print("Enter image path:")
-    img_path = input()
+    # # take in image path to analyze
+    # print("Enter image path:")
+    # img_path = input()
 
-    all_text = extract_text(img_path)
-    for text in all_text:
-        print(text)
-        print("\n\n-----------------\n\n")
+    # all_text = extract_text(img_path)
+    # f = open(output_path, "a")  # append mode
+
+    # for text in all_text:
+    #     f.write(text)
+
+    f = open(output_path, "a")  # append mode
+    for i in range(19, 36):
+        img_path = './data/raw_images/' + str(i) + '.jpeg'
+        print(img_path)
+        all_text = extract_text(img_path)
+        for text in all_text:
+            f.write(text)

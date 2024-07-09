@@ -1,5 +1,9 @@
 import torch;
 
+'''
+Class for a text dataset to train the mobileBert model for text determination. 
+'''
+
 class TextDataset(torch.utils.data.Dataset):
     def __init__(self, encodings, labels):
         self.encodings = encodings
