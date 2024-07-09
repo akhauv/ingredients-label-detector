@@ -18,13 +18,16 @@ def clean_ingredients(ingredients):
     cleaned_ingredients = cleaned_ingredients.replace("-\n", "")
     cleaned_ingredients = cleaned_ingredients.replace("\n", " ")
 
-    # strip anything after the "may contain" and "contains" keyword
-    contains_ind = cleaned_ingredients.find("may contain")
-    if contains_ind != -1:
-        cleaned_ingredients = cleaned_ingredients[:contains_ind]
-    contains_ind = cleaned_ingredients.find("contains")
-    if contains_ind != -1:
-        cleaned_ingredients = cleaned_ingredients[:contains_ind]
+    # strip anything after the certain keywords keyword
+    strip_ind = cleaned_ingredients.find("may contain")
+    if strip_ind != -1:
+        cleaned_ingredients = cleaned_ingredients[:strip_ind]
+    strip_ind = cleaned_ingredients.find("contains")
+    if strip_ind != -1:
+        cleaned_ingredients = cleaned_ingredients[:strip_ind]
+    strip_ind = cleaned_ingredients.find("vitamins and minerals")
+    if strip_ind != -1:
+        cleaned_ingredients = cleaned_ingredients[:strip_ind]
     
     # strip any unwanted characters 
     pattern = r'[^A-Za-z0-9\-()\[\]{}/%:,.\s]'
@@ -33,7 +36,9 @@ def clean_ingredients(ingredients):
     cleaned_ingredients = cleaned_ingredients.replace(".", ",")
 
     # get rid of trailing commas
+    cleaned_ingredients = cleaned_ingredients.rstrip()
     cleaned_ingredients = cleaned_ingredients.rstrip(',')
+
 
     # add spaces after commas which don't have them
     cleaned_ingredients = re.sub(r',(?=\S)', ', ', cleaned_ingredients)
@@ -55,7 +60,7 @@ def get_ingredients_list(img_path):
         # get predictions 
         ingredients, _ = predict(text_arr)
         if len(ingredients) > best_len:
-            best_ingredients = "".join(ingredients)
+            best_ingredients = " ".join(ingredients)
             best_len = len(ingredients)
     
     # strip string to clean it
