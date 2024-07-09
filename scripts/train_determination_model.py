@@ -19,13 +19,12 @@ def train_dataset():
     # create training dataset
     train_encodings = tokenizer(text, truncation=True, padding=True, max_length=128)
     train_dataset = TextDataset(train_encodings, train_labels)
-    print("\nCreated dataset!\n\n\n")
 
     # load model
+    # MobileBertForSequenceClassification is a pre-trined MobileBERT model for sequence classification
     model = MobileBertForSequenceClassification.from_pretrained(model_name, num_labels=2)
     device = torch.device("cpu") # "mps" if torch.backends.mps.is_available() else 
     model.to(device)
-    print("\nloaded model!\n\n\n")
 
     # training parameters
     training_args = TrainingArguments(
@@ -46,11 +45,9 @@ def train_dataset():
         args=training_args,                  # training arguments, defined above
         train_dataset=train_dataset,         # training dataset
     )
-    print("\nCreated trainer!\n\n\n")
 
     # train model
     trainer.train()
-    print("\ntrained model!\n\n\n")
 
     # Save the trained model and tokenizer
     model.save_pretrained('./models/trained')
