@@ -12,15 +12,17 @@ def predict(texts):
     with torch.no_grad():
         outputs = determination_model(**encodings)
     logits = outputs.logits
-    predictions = torch.argmax(logits, dim=-1)
-    return predictions
+    probabilities = torch.nn.functional.softmax(logits, dim=-1)
+    confidence_scores, _ = torch.max(probabilities, dim=-1)
+    return confidence_scores
 
 if __name__ == '__main__':
     # load model
     load_model()
 
-    testing_texts = ['butter, flour, eggs, milk, cocao powde, sladfjhlskdjfnnvnvnm, sdfska, aaa']
+    testing_texts = ['Contains 2% or less of salt, whey, paprika, monosodium',
+                     'glutamate, buttermilk, parmesan cheese (milk, cheese cultures']
 
     # Get predictions
-    predictions = predict(testing_texts)
-    print(predictions)
+    confidence_scores = predict(testing_texts)
+    print(confidence_scores)
