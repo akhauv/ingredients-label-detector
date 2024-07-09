@@ -1,4 +1,4 @@
-from text_detection import load_model, detect_text
+from text_detection import load_detection_model, detect_text
 import pytesseract
 from PIL import Image
 import cv2
@@ -41,7 +41,7 @@ def extract_text(img_path):
     # return text data
     extracted_text = []
     for i in range(len(preprocessed_imgs)):
-        extracted_text.append('\n\n'.join(text_data[i]))
+        extracted_text.append('\n'.join(text_data[i]))
     return extracted_text
 
 '''
@@ -49,7 +49,7 @@ main
 '''
 if __name__ == '__main__':
     # load model 
-    load_model()
+    load_detection_model()
 
     # take in image path to analyze
     print("Enter image path:")

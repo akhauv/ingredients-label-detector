@@ -4,7 +4,7 @@ import torch
 '''
 Loads model
 '''
-def load_model():
+def load_determination_model():
     global determination_model
     determination_model = MobileBertForSequenceClassification.from_pretrained('./models/trained')
     
@@ -29,12 +29,17 @@ def predict(texts):
     # converts logits into probabilities and extracts maximum probability from each
     probabilities = torch.nn.functional.softmax(logits, dim=-1)
     confidence_scores, predictions = torch.max(probabilities, dim=-1)
-    return confidence_scores, predictions
+
+    # masks texts and confidnce scroes based on probability 
+    mask = predictions == 1
+    filtered_confidence_scores = confidence_scores[mask]
+    filtered_texts = [text for text, include in zip(texts, mask) if include]
+    return filtered_texts, filtered_confidence_scores.tolist()
 
 '''
 Splits the text if it exceeds the number of tokens 
 '''
-def split(texts, max_length = 512):
+def split_to_tokensize(texts, max_length = 512):
     # the final list of all split texts 
     new_texts = []
 
@@ -58,17 +63,21 @@ def split(texts, max_length = 512):
 
     return new_texts
 
+def process_text_chunk(text):
+    # split text based on lines and max # of tokens
+    text_arr = text.splitlines()
+    text_arr = split_to_tokensize(text_arr)
+    return text_arr
+
 if __name__ == '__main__':
     # load model
-    load_model()
+    load_determination_model()
 
-    testing_texts = ['- ] Ingredients: Enriched flovr (wheat flout, rao: reduced iron,”',
-                    'vitamin Bj (thiamin monondate), tame B; (rofl, ie',
-                    ', vegetable oil (high oles soybean,’so,bean’ palm, «2,',
-                    'of canola with TRHO for freshness), white cheddar * s *;',]
-    testing_texts = split(testing_texts)
+    text = "Cultures, enzymes, annatto extract color).\nContains 2% or less of salt, whey, paprika, monosodium\nglutamate, buttermilk, parmesan cheese (milk, cheese cultures,\nSalt, enzymes), cheddar cheese (milk, cheese cuttures, salt,\nenzymes), garlic powder, yeast, tomato powder, sugar, onion"
+    text_arr = process_text_chunk(text)
 
     # Get predictions
-    confidence_scores, predictions = predict(testing_texts)
+    ingredients, confidence_scores = predict(text_arr)
     print(confidence_scores)
-    print(predictions)
+    print(ingredients)
+

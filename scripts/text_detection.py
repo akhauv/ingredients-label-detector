@@ -37,7 +37,7 @@ def detect_text(img_path):
             dtype=np.float32)
     
     # run a tensorflow session to compute class probabilities and box predictions
-    cls_prob, box_pred = model.extract_text_info(blobs)
+    cls_prob, box_pred = detection_model.extract_text_info(blobs)
 
     # generate region proposals based on classification probabilities and box predictions
     rois, _ = proposal_layer(cls_prob, box_pred, blobs['img_info'], 'TEST', anchor_scales=cfg.ANCHOR_SCALES)
@@ -157,9 +157,9 @@ def has_overlap(box_one, box_two):
 loads model
     Returns: nothing
 '''
-def load_model():
-    global model
-    model = LabelDetector()
+def load_detection_model():
+    global detection_model
+    detection_model = LabelDetector()
 
 '''
 Merges two given boxes into one
@@ -234,7 +234,7 @@ main
 '''
 if __name__ == '__main__':
     # load model 
-    load_model()
+    load_detection_model()
 
     # take in image path to analyze
     print("Enter image path:")
