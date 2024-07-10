@@ -58,8 +58,12 @@ def train_dataset():
     trainer.train()
 
     # Save the trained model and tokenizer
-    model.save_pretrained('./models/trained')
-    tokenizer.save_pretrained('./models/trained')
+    model_path = './models/trained'
+    if not os.path.exists(model_path):
+        # Create the directory
+        os.makedirs(model_path)
+    model.save_pretrained('model_path')
+    tokenizer.save_pretrained('model_path')
 
 if __name__ == '__main__':
     train_dataset()
