@@ -19,7 +19,7 @@ boxes so the resulting bounding boxes would encompass text paragraphs. This
 prevents these initially skipped lines from being ignored.
 
 <p align="center">
-<img src="./data/bounded_images/sample_1.jpeg" height=500px>
+<img src="./data/bounded_images/sample_3.jpeg" height=500px>
 </p>
 
 ### Text Extraction (OCR)
@@ -90,3 +90,10 @@ also run:
 6. Pillow
 7. Numpy
 8. Regex
+
+## Future Improvement
+
+- Train the mobileBERT model on a larger dataset to increase accuracy
+- Improve OpenCV image preprocessing for better results on varied images
+- Add a spellcheck step during text postprocessing
+- Create an API (?)
