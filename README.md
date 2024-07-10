@@ -1,21 +1,5 @@
 # ingredients-label-detector
 
-## How to Run
-
-1. Clone this repository
-2. Download the frozen cptn file for text line recognition <a href="https://github.com/eragonruan/text-detection-ctpn/releases/download/untagged-48d74c6337a71b6b5f87/ctpn.pb">here</a>
-3. Save the model in `./data`
-4. Add any desired testing images in `./data/raw_images`
-4. Run `python ./scripts/run_ingredients_detection.py` and answer terminal
-   prompts.
-
-If you want to run individual stages of the ingredients detection process, you can
-also run: 
-- `python ./scripts/text_detection.py` for text detection
-- `python ./scripts/text_extraction.py` for text extraction
-- `python ./scripts/text_determination.py` for text determination: the classification of text lines as
-  components of an ingredients list.
-
 ## Pipeline
 
 There are three parts to the ingredients extraction process: text detection, 
@@ -79,6 +63,22 @@ Image 1
 Image 2
 
 `ingredients: enriched flour (wheat flour, niacin, reduced iron, thiamin mononitrate, riboflavin, folic acid), peanut butter (ground peanuts), vegetable oils (palm oil, soybean oil, canola oil), sugar, dextrose, salt, corn syrup, sodium bicarbonate, monocalcium phosphate, ammonium bicarbonate, soy lecithin, whey`
+
+## How to Run
+
+1. Clone this repository
+2. Download the frozen cptn file for text line recognition <a href="https://github.com/eragonruan/text-detection-ctpn/releases/download/untagged-48d74c6337a71b6b5f87/ctpn.pb">here</a>
+3. Save the model in `./data`
+4. Add any desired testing images in `./data/raw_images`
+4. Run `python ./scripts/run_ingredients_detection.py` and answer terminal
+   prompts.
+
+If you want to run individual stages of the ingredients detection process, you can
+also run: 
+- `python ./scripts/text_detection.py` for text detection
+- `python ./scripts/text_extraction.py` for text extraction
+- `python ./scripts/text_determination.py` for text determination: the classification of text lines as
+  components of an ingredients list.
 
 ## Requirements
 
