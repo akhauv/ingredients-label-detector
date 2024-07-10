@@ -63,3 +63,4 @@ if __name__ == '__main__':
     all_text = extract_text(img_path)
     for text in all_text:
         print(text)
+        print("\n\n-------------\n\n")

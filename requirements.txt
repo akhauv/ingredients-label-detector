@@ -1,0 +1,8 @@
+tensorflow==2.16.1
+torch==2.3.1
+transformers==4.42.3
+opencv-python==4.10.0.84
+pytesseract==0.3.10
+pillow==10.3.0
+numpy==1.26.4
+regex==2024.5.15
