@@ -1,10 +1,15 @@
-from text_detection import load_detection_model, detect_text
-import pytesseract
-from PIL import Image
 import cv2
-import preprocess
+from PIL import Image
+import pytesseract
 
-output_path = './data/training_data/unformatted_data.txt'
+import preprocess
+from text_detection import load_detection_model, detect_text
+
+'''
+Extracts text from a given image using pytesseract.
+
+When run, user can input an image path and recieved all extracted text.
+'''
 
 '''
 Preprocesses and extracts text from a given image

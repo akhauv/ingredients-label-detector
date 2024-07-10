@@ -1,6 +1,11 @@
 import tensorflow as tf
 from tensorflow.python.platform import gfile    # used to read the frozen model file 
 
+'''
+Class for a label detector object for text detection, which houses its
+session graph. 
+'''
+
 class LabelDetector(object):
     def __init__(self):
         self.detection_graph = tf.Graph()

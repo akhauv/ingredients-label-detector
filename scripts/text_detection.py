@@ -1,24 +1,30 @@
 import cv2
 import numpy as np
-import tensorflow as tf
-from tensorflow.python.platform import gfile    # used to read the frozen model file 
-import sys
 import os
+import sys
 
 sys.path.append(os.getcwd())
-from lib.fast_rcnn.config import cfg, cfg_from_file
+from text_detection_class import LabelDetector
+from lib.fast_rcnn.config import cfg
 from lib.fast_rcnn.test import _get_blobs
 from lib.text_connector.detectors import TextDetector
 from lib.text_connector.text_connect_cfg import Config as TextLineCfg
 from lib.rpn_msr.proposal_layer_tf import proposal_layer
 
-from text_detection_class import LabelDetector
+'''
+This script detects text lines within an image using a cptn model. It also can merge
+nearby text lines after detection to produce paragraph bounds. 
+
+When run, the user can input an image path and whether they would like bounding
+boxes to be visually drawn. They will recieve bounding box coordinates and a drawn
+visual in data/bounded_images if they specified yes. 
+'''
 
 '''
 Detects all text within an image
     Returns: list of all blobs
 '''
-def detect_text(img_path):
+def detect_text(img_path, shouldDraw = False):
     # load image and resize
     img = cv2.imread(img_path)
     img, scale = resize_img(img, scale=TextLineCfg.SCALE, max_scale=TextLineCfg.MAX_SCALE)
@@ -61,13 +67,14 @@ def detect_text(img_path):
         blobs_list.append((int(min_x / scale), int(min_y / scale), int(max_x / scale), int(max_y / scale)))
 
     # draw boxes and return information
-    # draw_boxes(img, img_path, boxes, scale)
+    if (shouldDraw):
+        draw_boxes(img, img_path, boxes, scale)
+    
     return blobs_list
 
 '''
 Given a list of bounding boxes, draws each onto the image and outputs
-both the image with boxes drawn on and a txt file with the bounding box
-coordinates.
+both the image with boxes drawn on.
     Returns: nothing
 '''
 def draw_boxes(img, image_name, boxes, scale):
@@ -89,7 +96,7 @@ def draw_boxes(img, image_name, boxes, scale):
 
     # resize image back to regular scale and save results image
     img = cv2.resize(img, None, None, fx=1.0 / scale, fy=1.0 / scale, interpolation=cv2.INTER_LINEAR)
-    cv2.imwrite(os.path.join("data/results", base_name), img)
+    cv2.imwrite(os.path.join("data/bounded_images", base_name), img)
 
 '''
 Filters out all boxes too small to be valid text lines.
@@ -227,7 +234,12 @@ if __name__ == '__main__':
     # take in image path to analyze
     print("Enter image path:")
     img_path = input()
-    print("analyzing")
 
-    print(detect_text(img_path))
-    print("done!")
+    # request boundign boxes
+    print("Would you like bounding boxes to be visually drawn? (y/n)")
+    shouldDrawStr = input()
+    shouldDraw = False
+    if (shouldDrawStr.lower() == 'y'):
+        shouldDraw = True
+
+    print(detect_text(img_path, shouldDraw))

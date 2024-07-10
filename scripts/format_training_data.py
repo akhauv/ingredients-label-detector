@@ -1,6 +1,7 @@
 '''
 A simple script to help format training data for the mobileBert model. It brackets
-each line in quotations, adds a comma at the end, and adds an indent.
+each line in quotations, adds a comma at the end, and adds an indent, outputting 
+in a format useful for data/training_data/training_data.py.
 '''
 
 # file paths 

@@ -1,8 +1,18 @@
-from transformers import MobileBertForSequenceClassification, MobileBertTokenizer
 import torch
+from transformers import MobileBertForSequenceClassification, MobileBertTokenizer
+
+'''
+Determines whether inputted text classifies as an ingredients list or not using a fine-tuned
+mobileBert model. To use this, ensure that you have a mobileBert model and tokenizer trained on the 
+given data/training_data dataset in a models/trained folder.  
+
+When run, user is prompted for a text line for which the model will output the ingredients list 
+(if it is so) and confidence scores.
+'''
 
 '''
 Loads model
+    Returns: nothing
 '''
 def load_determination_model():
     global determination_model
@@ -37,7 +47,18 @@ def predict(texts):
     return filtered_texts, filtered_confidence_scores.tolist()
 
 '''
-Splits the text if it exceeds the number of tokens 
+processes a given text chunk into analyzable lines
+    Returns: processed text list
+'''
+def process_text_chunk(text):
+    # split text based on lines and max # of tokens
+    text_arr = text.splitlines()
+    text_arr = split_to_tokensize(text_arr)
+    return text_arr
+
+'''
+Splits the text if it exceeds the number of tokens.
+    Returns: split text list 
 '''
 def split_to_tokensize(texts, max_length = 512):
     # the final list of all split texts 
@@ -63,21 +84,20 @@ def split_to_tokensize(texts, max_length = 512):
 
     return new_texts
 
-def process_text_chunk(text):
-    # split text based on lines and max # of tokens
-    text_arr = text.splitlines()
-    text_arr = split_to_tokensize(text_arr)
-    return text_arr
-
+'''
+main
+'''
 if __name__ == '__main__':
     # load model
     load_determination_model()
 
-    text = "Cultures, enzymes, annatto extract color).\nContains 2% or less of salt, whey, paprika, monosodium\nglutamate, buttermilk, parmesan cheese (milk, cheese cultures,\nSalt, enzymes), cheddar cheese (milk, cheese cuttures, salt,\nenzymes), garlic powder, yeast, tomato powder, sugar, onion"
+    # take in image path to analyze
+    print("Enter text to determine:")
+    text = input()
     text_arr = process_text_chunk(text)
 
     # Get predictions
     ingredients, confidence_scores = predict(text_arr)
-    print(confidence_scores)
     print(ingredients)
+    print(confidence_scores)
 

@@ -1,7 +1,8 @@
-from text_detection import load_detection_model
-from text_extraction import extract_text
-from text_determination import predict, load_determination_model, process_text_chunk
 import re
+
+from text_detection import load_detection_model
+from text_determination import predict, load_determination_model, process_text_chunk
+from text_extraction import extract_text
 
 '''
 Ingredients detection is split into three parts:
@@ -9,8 +10,13 @@ Ingredients detection is split into three parts:
     2) Text extraction: pulling text from text chunks into strings
     3) Text determination: determining which of the strings corresponds to the ingredietns list.
 This script combines each part of the pipeline.
+
+When run, user can input an image path and have a list of ingredients returned to them. 
 '''
 
+'''
+Cleans ingredients string of unwanted characters. 
+'''
 def clean_ingredients(ingredients):
     cleaned_ingredients = ingredients.lower()
 
@@ -30,8 +36,12 @@ def clean_ingredients(ingredients):
         cleaned_ingredients = cleaned_ingredients[:strip_ind]
     
     # strip any unwanted characters 
-    pattern = r'[^A-Za-z0-9\-()\[\]{}/%:,.\s]'
+    pattern = r'[^A-Za-z0-9\-()\[\]&{}/:,.\s]'
     cleaned_ingredients = re.sub(pattern, '', cleaned_ingredients)
+    open_brackets = r'[\[{]'
+    closed_brackets = r'[}\]]'
+    cleaned_ingredients = re.sub(open_brackets, '(', cleaned_ingredients)
+    cleaned_ingredients = re.sub(closed_brackets, ')', cleaned_ingredients)
     cleaned_ingredients = cleaned_ingredients.replace("-", "")
     cleaned_ingredients = cleaned_ingredients.replace(".", ",")
 
@@ -45,6 +55,9 @@ def clean_ingredients(ingredients):
 
     return cleaned_ingredients
 
+'''
+Extracts ingredients list from an image
+'''
 def get_ingredients_list(img_path):
     # extract text 
     all_text = extract_text(img_path)
@@ -68,6 +81,9 @@ def get_ingredients_list(img_path):
 
     return cleaned_ingredients
 
+'''
+main
+'''
 if __name__ == '__main__':
     # load text detection and determination models
     load_detection_model()
@@ -79,4 +95,3 @@ if __name__ == '__main__':
 
     ingredients = get_ingredients_list(img_path)
     print(ingredients)
-

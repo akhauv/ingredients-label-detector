@@ -1,3 +1,7 @@
+# the number of lines of data containing positive ingredients text
+num_valid = 539
+
+# lines from 1 - num_valid are all classified as ingredients.
 text = [
 	'RIBOFLAVIN, FOLIC ACID, SUGAR, OATS, INVERT SUGAR, BUTTER (CREAM, SALT), PECANS, CHOCOLATE',
 	'CHUNKS (SUGAR, CHOCOLATE LIQUOR, COCOA BUTTER, DEXTROSE, SOY LECITHIN, SALT, VANILLA), MILK CHOC',
@@ -2758,5 +2762,3 @@ text = [
 	'S.a pe or Patt 2 3+ De not leave microwave unattended.;.: *-: ae',
 	'PUA Ta UU Tat ts Because microwaves cook differently, time Is Sphieoaitot',
 ]
-
-num_valid = 539

@@ -1,11 +1,19 @@
-from transformers import MobileBertTokenizer, MobileBertForSequenceClassification, Trainer, TrainingArguments
-import sys
 import os
+import sys
 import torch
-from text_dataset_class import TextDataset
+from transformers import MobileBertTokenizer, MobileBertForSequenceClassification, Trainer, TrainingArguments
 
 sys.path.append(os.getcwd())
 from data.training_data.training_data import text, num_valid
+from text_dataset_class import TextDataset
+
+'''
+When run, trains a MobileBert model for text classification on the data in data/training_data.
+Outputs the complete model in models/trained, for which it is able to classify lines of text
+into "ingredients" and "not ingredients". 
+Note that this model depends on lines to consist solely of ingredients or non-ingredients. 
+It is not trained to identify ingredients within mixed-content lines.
+'''
 
 def train_dataset():
     # format label 
@@ -28,7 +36,7 @@ def train_dataset():
 
     # training parameters
     training_args = TrainingArguments(
-        output_dir='./models',          # output directory
+        output_dir='./models',           # output directory
         num_train_epochs=3,              # total number of training epochs
         per_device_train_batch_size=16,  # batch size for training
         per_device_eval_batch_size=64,   # batch size for evaluation
@@ -52,7 +60,6 @@ def train_dataset():
     # Save the trained model and tokenizer
     model.save_pretrained('./models/trained')
     tokenizer.save_pretrained('./models/trained')
-
 
 if __name__ == '__main__':
     train_dataset()
