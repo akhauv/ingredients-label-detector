@@ -1,4 +1,5 @@
 from symspellpy.symspellpy import SymSpell, Verbosity
+import re
 
 def initialize_symspell():
     # Create SymSpell object
@@ -14,11 +15,26 @@ def initialize_symspell():
     separator = '$'
     symspell.load_dictionary(dictionary_path, term_index, count_index, separator)
 
-def correct_text(text):
-    words = text.split()
+def correct_ingredients_list(text):
+    phrases = re.split(r',\s*', text)
+    string_builder = []
+
+    for phrase in phrases:
+        corrected_phrase = correct_phrase(phrase)
+        string_builder.append(corrected_phrase)
+    
+    corrected_text = ', '.join(string_builder)
+    return corrected_text
+
+def correct_phrase(phrase):
+    words = phrase.split()
     corrected_words = []
     
     for word in words:
+        if len(word) <= 3:
+            corrected_words.append(word)
+            continue
+
         # Look up the word in the dictionary
         suggestions = symspell.lookup(word, Verbosity.CLOSEST, max_edit_distance=2)
         if suggestions:
@@ -28,7 +44,8 @@ def correct_text(text):
             # If no suggestions, use the original w ord
             corrected_words.append(word)
     
-    return corrected_words
+    corrected_phrase = ' '.join(corrected_words)
+    return corrected_phrase
 
 if __name__ == '__main__':
     # load model 
@@ -39,4 +56,4 @@ if __name__ == '__main__':
     text = input()
 
     # request boundign boxes
-    print(correct_text(text))
+    print(correct_ingredients_list(text))

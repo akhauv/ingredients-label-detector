@@ -3,6 +3,7 @@ import re
 from text_detection import load_detection_model
 from text_determination import predict, load_determination_model, process_text_chunk
 from text_extraction import extract_text
+from text_correction import initialize_symspell, correct_ingredients_list
 
 '''
 Ingredients detection is split into three parts:
@@ -21,6 +22,7 @@ def clean_ingredients(ingredients):
     cleaned_ingredients = ingredients.lower()
 
     # get rid of any newlines 
+    cleaned_ingredients = cleaned_ingredients.replace("ingredients:", "")
     cleaned_ingredients = cleaned_ingredients.replace("-\n", "")
     cleaned_ingredients = cleaned_ingredients.replace("\n", " ")
 
@@ -46,14 +48,14 @@ def clean_ingredients(ingredients):
     cleaned_ingredients = cleaned_ingredients.replace(".", ",")
 
     # get rid of trailing commas
-    cleaned_ingredients = cleaned_ingredients.rstrip()
+    cleaned_ingredients = cleaned_ingredients.strip()
     cleaned_ingredients = cleaned_ingredients.rstrip(',')
-
 
     # add spaces after commas which don't have them
     cleaned_ingredients = re.sub(r',(?=\S)', ', ', cleaned_ingredients)
 
-    return cleaned_ingredients
+    final_result = correct_ingredients_list(cleaned_ingredients)
+    return final_result
 
 '''
 Extracts ingredients list from an image
@@ -79,6 +81,9 @@ def get_ingredients_list(img_path):
     # strip string to clean it
     cleaned_ingredients = clean_ingredients(best_ingredients)
 
+    # runs cleaned ingredients through spellcheck
+     
+
     return cleaned_ingredients
 
 '''
@@ -88,6 +93,7 @@ if __name__ == '__main__':
     # load text detection and determination models
     load_detection_model()
     load_determination_model()
+    initialize_symspell()
 
     # take in image path to analyze
     print("Enter image path:")
