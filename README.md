@@ -45,8 +45,7 @@ model on a custom dataset (`./data/training_data`) to predict whether a given
 line of text belongs to an ingredients list. MobileBert is a compressed and
 accelerated version of the BERT language model.
 
-The results from each image variant are then compared, and the one with the
-most ingredients identified is chosen as the most accurate. The text is processed to remove any extraneous characters the OCR may have picked up and cut to eliminate the 'contains' clause of some ingredient lists.
+The results from each image variant are then compared, and the one with the most ingredients identified is chosen as the most accurate. The text is processed to remove any extraneous characters the OCR may have picked up and cut to eliminate the 'contains' clause of some ingredient lists. Lastly, it is run through the spellcheck.
 
 ### Some Results
 
@@ -58,11 +57,11 @@ The following output is produced by these sample images:
 
 Image 1
 
-`ingredients: gluten free flour blend (organic light buckwheat flour, gluten free oat flour, cassava flour, tapioca flour), non gmo sunflowe: oil, organic light brown sugar (organic cane sugar, organic molasses), gluten free oats, organic cane sugar, tapioca syrup, tapioca starch, water, fructose, tapioca fiber syrup, cinnamon, baking soda, sea salt, caramelized cane sugar, vanilla extract, rosemary extract`
+`gluten free flour blend, organic light buckwheat flour, gluten free oat flour, cassava flour, tapioca flour, non gmo sunflower oil, organic light brown sugar, organic cane sugar, organic molasses, gluten free oats, organic cane sugar, tapioca syrup, tapioca starch, water, fructose, tapioca fiber syrup, cinnamon, baking soda, sea salt, carmelized cane sugar, vanilla extract, rosemary extract`
 
 Image 2
 
-`ingredients: enriched flour (wheat flour, niacin, reduced iron, thiamin mononitrate, riboflavin, folic acid), peanut butter (ground peanuts), vegetable oils (palm oil, soybean oil, canola oil), sugar, dextrose, salt, corn syrup, sodium bicarbonate, monocalcium phosphate, ammonium bicarbonate, soy lecithin, whey`
+`enriched flour, wheat flour, niacin, reduced iron, thiamin mononitrate, riboflavin, folic acid, peanut butter, ground peanuts, vegetable oils, palm oil, soybean oil, canola oil, sugar, dextrose, salt, corn syrup, sodium bicarbonate, monocalcium phosphate, ammonium bicarbonate, soy lecithin, whey`
 
 ## How to Run
 
@@ -90,6 +89,7 @@ also run:
 6. Pillow
 7. Numpy
 8. Regex
+9. SymSpell
 
 ## Future Improvement
 
