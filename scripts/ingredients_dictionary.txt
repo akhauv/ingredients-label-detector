@@ -1,0 +1,125 @@
+sugar\t100000
+salt\t100000
+water\t100000
+ascorbic acid\t5000
+sodium benzoate\t3000
+citric acid\t8000
+corn syrup\t7000
+soy lecithin\t2000
+wheat flour\t8500
+milk\t9500
+soybean oil\t6000
+palm oil\t6000
+olive oil\t7000
+baking soda\t5000
+baking powder\t5000
+vanilla extract\t4500
+corn starch\t7000
+xanthan gum\t3000
+potassium sorbate\t3500
+monosodium glutamate\t2500
+sodium chloride\t4000
+calcium carbonate\t3000
+sodium citrate\t2500
+sodium erythorbate\t2000
+potassium nitrate\t1500
+sodium nitrite\t1500
+acetic acid\t4000
+tartaric acid\t3000
+lactic acid\t3500
+malic acid\t2500
+fumaric acid\t2000
+calcium phosphate\t2000
+trisodium phosphate\t1500
+vitamin C\t3000
+sodium ascorbate\t3000
+iron\t3000
+zinc\t3000
+whole grain oats\t4000
+honey\t8000
+brown sugar syrup\t3000
+tripotassium phosphate\t2000
+canola oil\t6000
+sunflower oil\t6000
+rosemary extract\t2500
+monoglycerides\t2000
+tocopherols\t2000
+organic oats\t3000
+tapioca syrup\t2000
+organic\t10000
+fig paste\t2000
+high oleic sunflower oil\t2000
+vanilla\t3000
+maltodextrin\t4500
+rice\t9000
+cane sugar\t5000
+sodium bicarbonate\t2500
+monosodium phosphate\t2000
+cinnamon\t3000
+blueberries\t2000
+concentrate\t2500
+rice maltodextrin\t2000
+tapioca maltodextrin\t2000
+paprika\t3000
+disodium inosinate\t2000
+disodium guanylate\t2000
+natural and artificial flavors\t2500
+spice\t2000
+annatto extract\t2000
+turmeric extract\t2000
+garlic\t4000
+powder\t3000
+thiamin mononitrate\t2000
+soybean\t5000
+high oleic soybean\t2000
+cheese cultures\t2000
+whey\t3000
+gluten free\t3000
+shea\t2000
+egg\t4000
+sunflower lecithin\t2000
+puree concentrate\t2000
+apple\t4000
+apple juice\t3000
+apple fiber\t2000
+carrot\t3000
+juice concentrate\t2000
+peanut\t4000
+peanut oil\t2000
+molasses\t2000
+dextrose\t2500
+corn meal\t2000
+pyridoxine hydrochloride\t2000
+niacinamide\t2000
+caramel\t2500
+cashews\t2000
+safflower\t2000
+safflower oil\t2000
+rice flour\t2500
+palm kernel oil\t2000
+fructose\t3000
+vegetable glycerin\t2000
+barley malt extract\t2500
+mixed tocopherols\t2000
+chicory root\t2000
+chicory root extract\t2000
+peanuts\t3000
+cocoa\t4000
+cocoa powder\t3000
+sorbitol\t2000
+xylitol\t2000
+gum base\t2000
+glycerol\t2000
+hydrogenated oil\t2000
+mannitol\t2000
+aspartame\t2000
+acesulfame K\t2000
+BHT\t2000
+Hydrogenated Starch hydrolysate\t2000
+chain triglycerides\t2000
+carnauba wax\t2000
+pectin\t2500
+tartrazine\t2000
+glaze\t2000
+lecithin\t3000
+vanillin\t2000
