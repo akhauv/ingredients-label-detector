@@ -1,125 +1,148 @@
-sugar\t100000
-salt\t100000
-water\t100000
-ascorbic acid\t5000
-sodium benzoate\t3000
-citric acid\t8000
-corn syrup\t7000
-soy lecithin\t2000
-wheat flour\t8500
-milk\t9500
-soybean oil\t6000
-palm oil\t6000
-olive oil\t7000
-baking soda\t5000
-baking powder\t5000
-vanilla extract\t4500
-corn starch\t7000
-xanthan gum\t3000
-potassium sorbate\t3500
-monosodium glutamate\t2500
-sodium chloride\t4000
-calcium carbonate\t3000
-sodium citrate\t2500
-sodium erythorbate\t2000
-potassium nitrate\t1500
-sodium nitrite\t1500
-acetic acid\t4000
-tartaric acid\t3000
-lactic acid\t3500
-malic acid\t2500
-fumaric acid\t2000
-calcium phosphate\t2000
-trisodium phosphate\t1500
-vitamin C\t3000
-sodium ascorbate\t3000
-iron\t3000
-zinc\t3000
-whole grain oats\t4000
-honey\t8000
-brown sugar syrup\t3000
-tripotassium phosphate\t2000
-canola oil\t6000
-sunflower oil\t6000
-rosemary extract\t2500
-monoglycerides\t2000
-tocopherols\t2000
-organic oats\t3000
-tapioca syrup\t2000
-organic\t10000
-fig paste\t2000
-high oleic sunflower oil\t2000
-vanilla\t3000
-maltodextrin\t4500
-rice\t9000
-cane sugar\t5000
-sodium bicarbonate\t2500
-monosodium phosphate\t2000
-cinnamon\t3000
-blueberries\t2000
-concentrate\t2500
-rice maltodextrin\t2000
-tapioca maltodextrin\t2000
-paprika\t3000
-disodium inosinate\t2000
-disodium guanylate\t2000
-natural and artificial flavors\t2500
-spice\t2000
-annatto extract\t2000
-turmeric extract\t2000
-garlic\t4000
-powder\t3000
-thiamin mononitrate\t2000
-soybean\t5000
-high oleic soybean\t2000
-cheese cultures\t2000
-whey\t3000
-gluten free\t3000
-shea\t2000
-egg\t4000
-sunflower lecithin\t2000
-puree concentrate\t2000
-apple\t4000
-apple juice\t3000
-apple fiber\t2000
-carrot\t3000
-juice concentrate\t2000
-peanut\t4000
-peanut oil\t2000
-molasses\t2000
-dextrose\t2500
-corn meal\t2000
-pyridoxine hydrochloride\t2000
-niacinamide\t2000
-caramel\t2500
-cashews\t2000
-safflower\t2000
-safflower oil\t2000
-rice flour\t2500
-palm kernel oil\t2000
-fructose\t3000
-vegetable glycerin\t2000
-barley malt extract\t2500
-mixed tocopherols\t2000
-chicory root\t2000
-chicory root extract\t2000
-peanuts\t3000
-cocoa\t4000
-cocoa powder\t3000
-sorbitol\t2000
-xylitol\t2000
-gum base\t2000
-glycerol\t2000
-hydrogenated oil\t2000
-mannitol\t2000
-aspartame\t2000
-acesulfame K\t2000
-BHT\t2000
-Hydrogenated Starch hydrolysate\t2000
-chain triglycerides\t2000
-carnauba wax\t2000
-pectin\t2500
-tartrazine\t2000
-glaze\t2000
-lecithin\t3000
-vanillin\t2000
+sugar$100000
+salt$100000
+water$100000
+ascorbic$5000
+acid$5000
+sodium$3000
+benzoate$3000
+citric$8000
+corn$7000
+syrup$7000
+soy$2000
+lecithin$2000
+wheat$8500
+flour$8500
+milk$9500
+soybean$6000
+oil$6000
+palm$6000
+olive$7000
+baking$5000
+soda$5000
+powder$5000
+vanilla$4500
+extract$4500
+starch$7000
+xanthan$3000
+gum$3000
+potassium$3500
+sorbate$3500
+monosodium$2500
+glutamate$2500
+chloride$4000
+calcium$3000
+carbonate$3000
+citrate$2500
+erythorbate$2000
+nitrate$1500
+nitrite$1500
+acetic$4000
+tartaric$3000
+lactic$3500
+malic$2500
+fumaric$2000
+phosphate$2000
+trisodium$1500
+vitamin$3000
+ascorbate$3000
+iron$3000
+zinc$3000
+whole$4000
+grain$4000
+honey$8000
+tripotassium$2000
+canola$6000
+sunflower$6000
+rosemary$2500
+monoglycerides$2000
+tocopherols$2000
+organic$10000
+oats$3000
+tapioca$2000
+fig$2000
+paste$2000
+high$2000
+oleic$2000
+maltodextrin$4500
+rice$9000
+cane$5000
+sugar$5000
+bicarbonate$2500
+monosodium$2000
+phosphate$2000
+cinnamon$3000
+blueberries$2000
+concentrate$2500
+maltodextrin$2000
+paprika$3000
+disodium$2000
+inosinate$2000
+guanylate$2000
+natural$2500
+artificial$2500
+flavors$2500
+spice$2000
+annatto$2000
+turmeric$2000
+garlic$4000
+powder$3000
+thiamin$2000
+mononitrate$2000
+soybean$5000
+cheese$2000
+cultures$2000
+whey$3000
+gluten$3000
+free$3000
+shea$2000
+egg$4000
+sunflower$2000
+puree$2000
+apple$4000
+juice$2000
+fiber$2000
+carrot$3000
+peanut$4000
+oil$2000
+molasses$2000
+dextrose$2500
+meal$2000
+pyridoxine$2000
+hydrochloride$2000
+niacinamide$2000
+caramel$2500
+cashews$2000
+safflower$2000
+flour$2500
+kernel$2000
+fructose$3000
+vegetable$2000
+glycerin$2000
+barley$2500
+malt$2500
+mixed$2000
+chicory$2000
+root$2000
+peanuts$3000
+cocoa$4000
+sorbitol$2000
+xylitol$2000
+gum$2000
+base$2000
+glycerol$2000
+hydrogenated$2000
+mannitol$2000
+aspartame$2000
+acesulfame$2000
+BHT$2000
+Starch$2000
+hydrolysate$2000
+chain$2000
+triglycerides$2000
+carnauba$2000
+wax$2000
+pectin$2500
+tartrazine$2000
+glaze$2000
+lecithin$3000
+vanillin$2000
