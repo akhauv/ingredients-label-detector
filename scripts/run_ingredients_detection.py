@@ -3,7 +3,7 @@ import re
 from text_detection import load_detection_model
 from text_determination import predict, load_determination_model, process_text_chunk
 from text_extraction import extract_text
-from text_correction import initialize_symspell, correct_ingredients_list
+from text_correction import initialize_symspell, clean_ingredients, correct_ingredients_list
 
 '''
 Ingredients detection is split into three parts:
@@ -14,48 +14,6 @@ This script combines each part of the pipeline.
 
 When run, user can input an image path and have a list of ingredients returned to them. 
 '''
-
-'''
-Cleans ingredients string of unwanted characters. 
-'''
-def clean_ingredients(ingredients):
-    cleaned_ingredients = ingredients.lower()
-
-    # get rid of any newlines 
-    cleaned_ingredients = cleaned_ingredients.replace("ingredients:", "")
-    cleaned_ingredients = cleaned_ingredients.replace("-\n", "")
-    cleaned_ingredients = cleaned_ingredients.replace("\n", " ")
-
-    # strip anything after the certain keywords keyword
-    strip_ind = cleaned_ingredients.find("may contain")
-    if strip_ind != -1:
-        cleaned_ingredients = cleaned_ingredients[:strip_ind]
-    strip_ind = cleaned_ingredients.find("contains")
-    if strip_ind != -1:
-        cleaned_ingredients = cleaned_ingredients[:strip_ind]
-    strip_ind = cleaned_ingredients.find("vitamins and minerals")
-    if strip_ind != -1:
-        cleaned_ingredients = cleaned_ingredients[:strip_ind]
-    
-    # strip any unwanted characters 
-    pattern = r'[^A-Za-z0-9\-()\[\]&{}/:,.\s]'
-    cleaned_ingredients = re.sub(pattern, '', cleaned_ingredients)
-    open_brackets = r'[\[{]'
-    closed_brackets = r'[}\]]'
-    cleaned_ingredients = re.sub(open_brackets, '(', cleaned_ingredients)
-    cleaned_ingredients = re.sub(closed_brackets, ')', cleaned_ingredients)
-    cleaned_ingredients = cleaned_ingredients.replace("-", "")
-    cleaned_ingredients = cleaned_ingredients.replace(".", ",")
-
-    # get rid of trailing commas
-    cleaned_ingredients = cleaned_ingredients.strip()
-    cleaned_ingredients = cleaned_ingredients.rstrip(',')
-
-    # add spaces after commas which don't have them
-    cleaned_ingredients = re.sub(r',(?=\S)', ', ', cleaned_ingredients)
-
-    final_result = correct_ingredients_list(cleaned_ingredients)
-    return final_result
 
 '''
 Extracts ingredients list from an image
@@ -81,10 +39,9 @@ def get_ingredients_list(img_path):
     # strip string to clean it
     cleaned_ingredients = clean_ingredients(best_ingredients)
 
-    # runs cleaned ingredients through spellcheck
-     
-
-    return cleaned_ingredients
+    # run through spellcheck
+    final_result = correct_ingredients_list(cleaned_ingredients)
+    return final_result
 
 '''
 main
