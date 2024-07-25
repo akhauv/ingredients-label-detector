@@ -2,6 +2,20 @@
 # slim: an official DOcker image. Lighter, more efficient
 FROM python:3.12-slim
 
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    gcc \
+    g++ \
+    make \
+    tesseract-ocr \
+    pkg-config \
+    libhdf5-dev \
+    libgl1-mesa-glx \
+    libglib2.0-0 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Set the working directory in the container
 # all commands that follow will be executed in this directory
 WORKDIR /app
