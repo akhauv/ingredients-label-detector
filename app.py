@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import uuid
 import os
 import sys
 
@@ -10,21 +11,34 @@ from scripts.run_ingredients_detection import get_ingredients_list
 
 app = Flask(__name__)
 
+@app.before_first_request
 def load_all():
     load_detection_model()
     load_determination_model()
     initialize_symspell()
 
-# load model when server starts
-load_all()
-
 @app.route('/extract', methods=['POST'])
 def extract():
     try:
-        # handle image upload here
-        img_path = 'placeholder'
+        # Check if a file is included in the request (required image)
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file part'}), 400
+        
+        file = request.files['file']
 
-        ingredients = get_ingredients_list(img_path)
+        # Check if a file was actually uploaded
+        if file.filename == '':
+            return jsonify({'error': 'No selected file'}), 400
+        
+        # save file
+        file_path = os.path.join('/tmp', str(uuid.uuid4()) + '-' + file.filename)
+        file.save(file_path)
+
+        # run ingredients extraction 
+        ingredients = get_ingredients_list(file_path)
+
+        # remove file after analysis
+        os.remove(file_path)
 
         return jsonify({'ingredients': ingredients})
     
