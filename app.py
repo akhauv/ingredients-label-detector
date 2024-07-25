@@ -11,11 +11,14 @@ from scripts.run_ingredients_detection import get_ingredients_list
 
 app = Flask(__name__)
 
-@app.before_first_request
 def load_all():
+    global has_loaded
     load_detection_model()
     load_determination_model()
     initialize_symspell()
+    has_loaded = True
+
+load_all()
 
 @app.route('/health', methods=['GET'])
 def health_check():
@@ -24,6 +27,9 @@ def health_check():
 @app.route('/extract', methods=['POST'])
 def extract():
     try:
+        if not has_loaded:
+            return jsonify({'error': 'server error'}), 400
+        
         # Check if a file is included in the request (required image)
         if 'file' not in request.files:
             return jsonify({'error': 'No file part'}), 400

@@ -1,9 +1,12 @@
 import cv2
 from PIL import Image
 import pytesseract
+import os
+import sys
 
-import preprocess
-from text_detection import load_detection_model, detect_text
+sys.path.append(os.getcwd())
+import scripts.preprocess as preprocess
+from scripts.text_detection import load_detection_model, detect_text
 
 '''
 Extracts text from a given image using pytesseract.

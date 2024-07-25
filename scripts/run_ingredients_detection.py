@@ -1,9 +1,11 @@
-import re
+import os
+import sys
 
-from text_detection import load_detection_model
-from text_determination import predict, load_determination_model, process_text_chunk
-from text_extraction import extract_text
-from text_correction import initialize_symspell, clean_ingredients, correct_ingredients_list
+sys.path.append(os.getcwd())
+from scripts.text_detection import load_detection_model
+from scripts.text_determination import predict, load_determination_model, process_text_chunk
+from scripts.text_extraction import extract_text
+from scripts.text_correction import initialize_symspell, clean_ingredients, correct_ingredients_list
 
 '''
 Ingredients detection is split into three parts:

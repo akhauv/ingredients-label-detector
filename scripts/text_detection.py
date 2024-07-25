@@ -4,7 +4,7 @@ import os
 import sys
 
 sys.path.append(os.getcwd())
-from text_detection_class import LabelDetector
+from scripts.text_detection_class import LabelDetector
 from lib.fast_rcnn.config import cfg
 from lib.fast_rcnn.test import _get_blobs
 from lib.text_connector.detectors import TextDetector
