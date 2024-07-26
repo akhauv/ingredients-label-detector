@@ -96,4 +96,4 @@ also run:
 - [ ] Train the mobileBERT model on a larger dataset to increase accuracy
 - [ ] Improve OpenCV image preprocessing for better results on varied images
 - [x] Add a spellcheck step during text postprocessing
-- [ ] Create an API
+- [x] Create an API
